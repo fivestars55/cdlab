@@ -7,15 +7,19 @@ int top = -1;
 void push(int x) {
     if (top == SIZE - 1)
         printf("Stack Overflow\n");
-    else
+    else {
         stack[++top] = x;
+        printf("%d pushed to stack\n", x);
+    }
 }
 
 void pop() {
     if (top == -1)
         printf("Stack Underflow\n");
-    else
+    else {
+        printf("%d popped from stack\n", stack[top]);
         top--;
+    }
 }
 
 void display() {
@@ -30,13 +34,35 @@ void display() {
 }
 
 int main() {
-    push(10);
-    push(20);
-    push(30);
-    display();
+    int choice, value;
 
-    pop();
-    display();
+    while (1) {
+        printf("\n--- Stack Menu ---\n");
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Display\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to push: ");
+                scanf("%d", &value);
+                push(value);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
 
     return 0;
 }
