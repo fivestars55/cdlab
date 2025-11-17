@@ -1,0 +1,33 @@
+
+2. Develop a lexical analyzer to recognize a few patterns
+   (ex: identifiers, constants, comments, operators etc.)
+
+%{
+#include <stdio.h>
+%}
+
+%%
+
+"//".*      { printf("Comment is found \n"); }
+
+[a-zA-Z][a-zA-Z0-9_]*   { printf("Identifier is found\n"); }
+
+"+" | "-" | "*" | "/" | "="   { printf("Operator is found\n"); }
+
+%%
+
+int main()
+{
+    printf("---- Lexical Analyzer ----\n");
+    printf("Enter code:\n");
+
+    yylex();
+
+    printf("\n---- Analysis completed ----\n");
+    return 0;
+}
+
+int yywrap()
+{
+    return 1;
+}
