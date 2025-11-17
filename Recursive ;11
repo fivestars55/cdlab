@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+#include<stdlib.h>
+
+char input[100];
+int i = 0;
+
+void S();
+void L();
+
+void error() {
+    printf("Invalid string!\n");
+    exit(0);
+}
+
+void match(char c) {
+    if (input[i] == c)
+        i++;
+    else
+        error();
+}
+
+// S → (L) | a
+void S() {
+    if (input[i] == '(') {
+        match('(');
+        L();
+        match(')');
+    }
+    else if (input[i] == 'a') {
+        match('a');
+    }
+    else {
+        error();
+    }
+}
+
+// L → S | L , S
+void L() {
+    S();  // first S
+
+    while (input[i] == ',') {
+        match(',');
+        S();
+    }
+}
+
+int main() {
+    printf("Enter expression: ");
+    scanf("%s", input);
+
+    S();
+
+    if (input[i] == '\0')
+        printf("Valid string!\n");
+    else
+        printf("Invalid string!\n");
+
+    return 0;
+}
