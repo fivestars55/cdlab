@@ -1,0 +1,24 @@
+%{
+#include <stdio.h>
+
+int w = 0;
+int l = 0;
+%}
+
+%%
+\n        { l++; }
+[A–Z a–z 0–9]+   { w++; }
+%%
+
+int main()
+{
+    printf("Enter code:\n");
+    yylex();
+    printf("No. of lines: %d\n", l);
+    printf("No. of words: %d\n", w);
+}
+
+int yywrap()
+{
+    return 1;
+}
