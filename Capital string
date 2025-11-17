@@ -1,0 +1,18 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+[A–Z]+    { printf("%s is capital\n", yytext); }
+%%
+
+int main()
+{
+    printf("Enter input:\n");
+    yylex();
+}
+
+int yywrap()
+{
+    return 1;
+}
